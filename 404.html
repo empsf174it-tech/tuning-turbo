@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Tuning Turbo</title>
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      background: var(--bg-primary);
+      overflow: hidden;
+    }
+    .error-page::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1542282088-fe8426682b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+      opacity: .25;
+    }
+    .error-page::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(70% 90% at 50% 50%, transparent, var(--bg-primary) 78%);
+    }
+    .error-page .container { position: relative; z-index: 2; }
+    .error-code {
+      font-size: clamp(96px, 20vw, 200px);
+      font-family: var(--font-heading);
+      color: var(--accent-ink);
+      line-height: 1;
+      margin-bottom: var(--sp-3);
+    }
+    .error-page h2 { color: var(--text-primary); margin-bottom: var(--sp-4); }
+  </style>
+</head>
+<body>
+
+  <main class="error-page">
+    <div class="container">
+      <div class="error-code">404</div>
+      <h2>Engine Stalled. Page Not Found.</h2>
+      <p style="color: var(--text-secondary); margin-bottom: var(--sp-6);">The page you are looking for has been moved, deleted, or possibly never existed.</p>
+      <a href="index.html" class="btn btn-primary">Return to Paddock</a>
+    </div>
+  </main>
+
+  <!-- Theme script for 404 page -->
+  <script>
+    const savedTheme = localStorage.getItem('theme');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    let currentTheme = 'dark';
+    if (savedTheme) {
+      currentTheme = savedTheme;
+    } else if (prefersLight) {
+      currentTheme = 'light';
+    }
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  </script>
+</body>
+</html>
