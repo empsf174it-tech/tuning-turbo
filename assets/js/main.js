@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initMobileMenu();
   initHeaderScroll();
+  initBackToTop();
   initHeroParallax();
   initReveal();
   initCounters();
@@ -16,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCompare();
   initPowerCalculator();
   initCardSpotlight();
-  initFAQ();
   initFormValidation();
 });
 
@@ -88,6 +88,19 @@ function initHeaderScroll() {
   onScroll();
 }
 
+function initBackToTop() {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+
+  const onScroll = () => btn.classList.toggle('visible', window.scrollY > 600);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
+  });
+}
+
 function initHeroParallax() {
   const media = document.querySelector('.hero-media');
   if (!media || REDUCED) return;
@@ -136,9 +149,9 @@ function closeMobileMenu() {
 /* ------------------------------------------------------- Reveal on scroll */
 function initReveal() {
   const targets = document.querySelectorAll(
-    '.section-header, .usp-card, .build-card, .package-card, .process-step, ' +
-    '.testi-card, .faq-item, .about-image, .dyno-chart, .compare-wrap, ' +
-    '.contact-form, .info-item, .stat-item'
+    '.section-header, .usp-card, .build-card, .package-card, ' +
+    '.testi-card, .about-image, .dyno-chart, .compare-wrap, ' +
+    '.contact-form, .info-item, .stat-item, .map-frame'
   );
 
   targets.forEach((el, i) => {
@@ -491,30 +504,6 @@ function initCardSpotlight() {
       const rect = card.getBoundingClientRect();
       card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
       card.style.setProperty('--my', `${e.clientY - rect.top}px`);
-    });
-  });
-}
-
-/* --------------------------------------------------------------- FAQ */
-function initFAQ() {
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    if (!question) return;
-
-    question.setAttribute('aria-expanded', 'false');
-    question.addEventListener('click', () => {
-      const wasActive = item.classList.contains('active');
-      faqItems.forEach(i => {
-        i.classList.remove('active');
-        const q = i.querySelector('.faq-question');
-        if (q) q.setAttribute('aria-expanded', 'false');
-      });
-      if (!wasActive) {
-        item.classList.add('active');
-        question.setAttribute('aria-expanded', 'true');
-      }
     });
   });
 }
