@@ -210,6 +210,17 @@ img { max-width: 100%; height: auto; display: block; }
   transform: translateY(-2px);
 }
 
+/* Hero sits on a dark image in both themes, so force a white outline there */
+.hero-btns .btn-outline {
+  border-color: #fff;
+  color: #fff;
+}
+.hero-btns .btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
 /* ============ LAYOUT ============ */
 .container {
   width: 100%;
@@ -1006,7 +1017,11 @@ section { padding: var(--sp-12) 0; position: relative; }
 
 /* Follow Us block inside the contact column */
 .follow-us .social-links { margin-top: var(--sp-3); gap: var(--sp-2); }
-.follow-us .social-links a { width: 38px; height: 38px; font-size: 17px; }
+.follow-us .social-links a { width: 38px; height: 38px; font-size: 17px; border-radius: 8px; }
+.follow-us .social-links a i {
+  width: auto; height: auto; border: 0; border-radius: 0;
+  background: none; font-size: inherit; color: inherit;
+}
 
 /* ============ MAP ============ */
 .map-section { background: var(--bg-secondary); border-block: 1px solid var(--border); }
